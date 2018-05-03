@@ -1,0 +1,155 @@
+\title{Naive Bayes Classification}
+\author{LJ Brown}
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\begin{document}
+\maketitle
+
+% new commands:
+\newcommand{\A}{x_1 \, and \, \dots \, x_n}
+
+% Hide Section Numbers
+\makeatletter
+% \@seccntformat is the command that adds the number to section titles
+% we make it a no-op
+\renewcommand{\@seccntformat}[1]{}
+\makeatother
+
+\section{Homework 6, Question 3}\label{abstract}
+
+% Subject
+You need to categorize vehicles into the following categories: truck, suv, and sedan using 5 features. Perform a naïve Bayes classification with the following probabilities. Show your work.
+	 	 
+
+% 
+% Table 1
+%
+
+% Title
+\begin{center} Table 1 \end{center}
+
+\begin{center}
+%\begin{table}
+ \begin{tabular}{||c c c c ||} 
+ \hline
+ $c$ & TRUCK & SUV & SEDAN \\ [0.5ex] 
+ \hline\hline
+ $P(c)$&0.35&0.4&0.25\\
+ \hline
+ $P(f_1|c)$&0.2&0.01&0.2\\
+ \hline
+ $P(f_2|c)$&0.01&0.1&0.05\\
+ \hline
+ $P(f_3|c)$&0.1&0.001&0.005\\
+ \hline
+ $P(f_4|c)$&0.001&0.2&0.005\\
+ \hline
+ $P(f_5|c)$ & 0.005& 0.008 & 0.01\\ [1ex] 
+ \hline
+\end{tabular}
+%\caption{Given Homework 5 Question 5 Table}
+%\label{table:kysymys}
+%\end{table}
+\end{center}
+
+% new commands
+\newcommand{\agb}[2]{P(#1|#2)}
+\newcommand{\bayes}[2]{\agb{#1}{#2} = \frac{P(#1) \agb{#2}{#1}}{P(#2)}}
+
+
+%
+% Bayes' Theorem
+%
+
+% reference equation number \ref{Bayes' Theorem}
+
+% Title
+\begin{center} Bayes' Theorem \end{center}
+
+% Equation
+\begin{equation} %\tag{1}
+		\nonumber \bayes{A}{B}
+		\label{Bayes' Theorem}
+\end{equation} \\
+
+
+$P(f_i)$ can be solved for with,
+
+\begin{equation}
+	\nonumber P(f_i) = \sum_{c \, \in \, C}{\agb{f_i}{c}}
+\end{equation}
+
+\begin{equation}
+\nonumber C =  \{ \text{TRUCK, SUV, SEDAN} \}
+\end{equation}
+
+%
+% Table 2
+%
+% Title
+%\begin{center} Table 1 \end{center}
+
+\begin{center}
+%\begin{table}
+ \begin{tabular}{||c c ||} 
+ \hline
+ $P(f_1)$&0.41\\
+ \hline
+ $P(f_2)$&0.16\\
+ \hline
+ $P(f_3)$&0.106\\
+ \hline
+ $P(f_4)$&0.206\\
+ \hline
+ $P(f_5)$ & 0.023\\ [1ex] 
+ \hline
+\end{tabular}
+%\caption{Given Homework 5 Question 5 Table}
+%\label{table:kysymys}
+%\end{table}
+\end{center}
+
+
+
+\begin{center} Question 3.a \end{center}
+
+a. 	What category would you assign to the vehicle (f1, f2, f3)?
+
+\begin{equation}
+	\nonumber \agb{c}{f_1 \cap f_2 \cap f_3} = \frac{P(c) \agb{f_1}{c}\agb{f_2}{c}\agb{f_3}{c}}{P(f_1)P(f_2)P(f_3)}
+\end{equation}
+
+\begin{equation}
+	\nonumber \agb{\text{TRUCK}}{f_1 \cap f_2 \cap f_3} = \frac{0.35 * 0.2 * 0.01 * 0.1 }{0.41 * 0.16 * 0.106} \approx 0.0101
+\end{equation}
+
+\begin{equation}
+	\nonumber \agb{\text{SUV}}{f_1 \cap f_2 \cap f_3} \approx 0.0005
+\end{equation}
+
+\begin{equation}
+	\nonumber \agb{\text{SEDAN}}{f_1 \cap f_2 \cap f_3} \approx 0.0018
+\end{equation}
+
+Answer for question 3.a is TRUCK.
+
+\begin{center} Question 3.b \end{center}
+
+b. 	What category would you assign to the vehicle (f1, f2, f4, f5)?
+
+\begin{equation}
+	\nonumber \agb{\text{TRUCK}}{f_1 \cap f_2 \cap f_4 \cap f_5} \approx 0.0001
+\end{equation}
+
+\begin{equation}
+	\nonumber \agb{\text{SUV}}{f_1 \cap f_2 \cap f_4 \cap f_5} \approx 0.0021
+\end{equation}
+
+\begin{equation}
+	\nonumber \agb{\text{SEDAN}}{f_1 \cap f_2 \cap f_4 \cap f_5} \approx 0.0004
+\end{equation}
+
+Answer for question 3.b is SUV.
+
+\end{document}
