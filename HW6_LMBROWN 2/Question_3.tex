@@ -53,6 +53,17 @@ You need to categorize vehicles into the following categories: truck, suv, and s
 %\end{table}
 \end{center}
 
+
+
+%
+%	Scratch
+%
+%The columns are mutually exclusive events, or c is a categorical variable
+% assume features are independent variables
+% features are dependent on c tho as was play
+
+
+
 % new commands
 \newcommand{\agb}[2]{P(#1|#2)}
 \newcommand{\bayes}[2]{\agb{#1}{#2} = \frac{P(#1) \agb{#2}{#1}}{P(#2)}}
@@ -74,14 +85,228 @@ You need to categorize vehicles into the following categories: truck, suv, and s
 \end{equation} \\
 
 
-$P(f_i)$ can be solved for with,
+%
+%	Classifying c given a feature set
+%
+
+\section{Classifying c given a set of features}
+
+
+%
+%	Variable Definitions
+%
+
+$F$ is a set of features  \\
+$f_i$ is a member of $F$ \\ \\
+$C = \{ \text{TRUCK, SUV, SEDAN} \} $ \\ 
+$c_i$ is a member of $C$ \\
+
+%
+%	Searching for
+%
+
+For a given feature set, $F$, I classify c as,
+\begin{equation}
+	\nonumber
+	%
+	c =
+	%
+ 	\max_{c_i \in C} \big( \agb{c_i}{F} \big)
+	%
+\end{equation}
+
+%
+% Bayes Theorem rewritten for a given set of features
+%
+
+Rewriting Bayes Theorem for a given class, $c_i$, and feature set, $F$,
 
 \begin{equation}
-	\nonumber P(f_i) = \sum_{c \, \in \, C}{\agb{f_i}{c}}
+	\nonumber \agb{c_i}{F} = \frac{P(c_i) \agb{F}{c_i}}{P(F)}
+\end{equation}
+
+% expanded equation above (1)
+%\begin{equation} 
+%	\nonumber \agb{c}{f_1 \cap f_2 \cap f_3} = \frac{P(c) \agb{f_1}{c}\agb{f_2}{c}\agb{f_3}{c}}{P(f_1)P(f_2)P(f_3)}
+%\end{equation}
+
+% expanded equation above (1)
+\begin{equation}
+	\nonumber \agb{c_i}{F} = 
+	%
+	\frac{P(c_i) \agb{F}{c_i}}{P(F)} =
+	%
+	P(c_i) \prod\limits_{f_i \in F} \frac{ \agb{f_i}{c_i}}{P(f_i)}
+	%
+\end{equation}
+
+%
+%	When classifying c I think you can drop the denominator and just compare relative scores
+%
+
+When classifying c I think you can drop the denominator and just compare relative scores. I think this is fine because the events in C are mutually exclusive.
+
+\begin{equation}
+	\nonumber
+	%
+	P(c_i) \prod\limits_{f_i \in F} \frac{ \agb{f_i}{c_i}}{P(f_i)}
+	%
+	\propto
+	%
+	P(c_i) \prod\limits_{f_i \in F} \agb{f_i}{c_i}
 \end{equation}
 
 \begin{equation}
-\nonumber C =  \{ \text{TRUCK, SUV, SEDAN} \}
+	\nonumber
+	%
+	\agb{c_i}{F}
+	%
+	\propto
+	%
+	P(c_i) \prod\limits_{f_i \in F} \agb{f_i}{c_i}
+\end{equation}
+
+
+% porportional max relation
+
+\begin{equation}
+	\nonumber
+	%
+ 	\max_{c_i \in C} \big( \agb{c_i}{F} \big)
+	%
+	=
+	%
+	\max_{c_i \in C} \Big( P(c_i) \prod\limits_{f_i \in F} \agb{f_i}{c_i} \Big)
+\end{equation}
+
+%
+% Final equation
+%
+
+So the final equation the program uses to classify is,
+\begin{equation}
+	\nonumber
+	%
+ 	c
+	%
+	=
+	%
+	\max_{c_i \in C} \Big( P(c_i) \prod\limits_{f_i \in F} \agb{f_i}{c_i} \Big)
+\end{equation}
+
+\begin{equation}
+	\nonumber
+	%
+	\text{Where $C$ and $F$ are given as parameters.}
+\end{equation}
+
+%
+%	Answers for Home work
+%
+
+\section{Question 3 Answers}
+
+\begin{center} Question 3.a \end{center}
+
+a. 	What category would you assign to the vehicle (f1, f2, f3)? \\ \\
+
+$F = \{ \text{f1, f2, f3} \}$
+
+\begin{equation}
+	\nonumber
+	%
+ 	c
+	%
+	=
+	\max_{c_i \in C} 
+	% 
+	\Big(
+	%
+	P(c_i) \agb{f_1}{c}\agb{f_2}{c_i}\agb{f_3}{c_i}
+	%
+	\Big)
+\end{equation}
+
+example calculation (happens to be the maximum) for a single value of $c_i$,
+
+\begin{equation}
+	\nonumber 
+	%
+	\agb{TRUCK}{F} \approx
+	%
+	0.35 * 0.2 * 0.01 * 0.1 
+	%
+	= 0.00007
+\end{equation}
+
+\begin{equation}
+	\nonumber
+	%
+ 	c
+	%
+	=
+	\max_{c_i \in C} 
+	% 
+	\Big(
+	%
+	P(c_i) \agb{f_1}{c}\agb{f_2}{c_i}\agb{f_3}{c_i}
+	%
+	\Big)
+	%
+	= \, \text{TRUCK}
+\end{equation}
+
+
+Answer for question 3.a is TRUCK.
+
+\begin{center} Question 3.b \end{center}
+
+b. 	What category would you assign to the vehicle (f1, f2, f4, f5)? \\
+
+$F = \{ \text{f1, f2, f4, f5} \}$
+
+\begin{equation}
+	\nonumber
+	%
+ 	c
+	%
+	=
+	\max_{c_i \in C} 
+	% 
+	\Big(
+	%
+	P(c_i) \agb{f_1}{c}\agb{f_2}{c_i}\agb{f_4}{c_i}\agb{f_5}{c_i}
+	%
+	\Big)
+	%
+	= \, \text{SUV}
+\end{equation}
+
+Answer for question 3.b is SUV.
+
+
+
+
+
+
+
+
+%
+%	Scratch
+%
+
+
+
+\section{Scratch}
+Below I'm trying to solve for $\agb{c_i}{F}$, not sure if it works everytime. \\ \\
+$F$ is a set of features  \\
+$f_i$ is a member of $F$ \\
+$c_i$ is a member of $C =  \{ \text{TRUCK, SUV, SEDAN} \}$ \\
+
+Ok so I'm assuming you can solve for $P(f_i)$ like this,
+
+\begin{equation}
+	\nonumber P(f_i) = \sum_{c_i \, \in \, C}{\agb{f_i}{c_i}}
 \end{equation}
 
 %
@@ -132,7 +357,7 @@ a. 	What category would you assign to the vehicle (f1, f2, f3)?
 	\nonumber \agb{\text{SEDAN}}{f_1 \cap f_2 \cap f_3} \approx 0.0018
 \end{equation}
 
-Answer for question 3.a is TRUCK.
+This gives the same answer for question 3.b: TRUCK.
 
 \begin{center} Question 3.b \end{center}
 
@@ -150,6 +375,6 @@ b. 	What category would you assign to the vehicle (f1, f2, f4, f5)?
 	\nonumber \agb{\text{SEDAN}}{f_1 \cap f_2 \cap f_4 \cap f_5} \approx 0.0004
 \end{equation}
 
-Answer for question 3.b is SUV.
+This gives the same answer for question 3.b: SUV.
 
 \end{document}
