@@ -1,0 +1,11 @@
+Weather&Temp&Humidity&Windy&Play\\
+Rainy&Cool&Normal&FALSE&yes\\
+Rainy&Cool&Normal&TRUE&No\\
+Overcast&Hot&High&FALSE&Yes\\
+Sunny&Mild&High&FALSE&No\\
+Rainy&Cool&Normal&FALSE&Yes\\
+Sunny&Cool&Normal&FALSE&Yes\\
+Rainy&Cool&Normal&FALSE&Yes\\
+Sunny&Hot&Normal&FALSE&Yes\\
+Overcast&Mild&High&TRUE&Yes\\
+Sunny&Mild&High&TRUE&No\\

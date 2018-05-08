@@ -1,0 +1,294 @@
+\title{Naive Bayes Classification}
+\author{LJ Brown}
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\begin{document}
+\maketitle
+
+% new commands:
+\newcommand{\A}{x_1 \, and \, \dots \, x_n}
+
+% Hide Section Numbers
+\makeatletter
+% \@seccntformat is the command that adds the number to section titles
+% we make it a no-op
+\renewcommand{\@seccntformat}[1]{}
+\makeatother
+
+\section{Homework 5, Question 5}\label{abstract}
+
+% Subject
+	 Derivation of Bayes' Theorem from Kolmogorov's definition of Conditional Probability, and using it to guess the value of the missing entry ($?$) in Table 1.
+	 
+%	Derivation of Bayes' Theorem from Kolmogorov's definition of Conditional Probability, and it's application for guessing the value of the missing entry ($?$) in Table 1. Also the answer to question 5. %\ref{table:kysymys}.
+
+% 
+% Table 1
+%
+
+% Title
+\begin{center} Table 1 \end{center}
+
+\begin{center}
+%\begin{table}
+ \begin{tabular}{||c c c c c||} 
+ \hline
+ Weather & Temp & Humidity & Windy & Play \\ [0.5ex] 
+ \hline\hline
+ Rainy&Cool&Normal&FALSE&yes\\
+ \hline
+ Rainy&Cool&Normal&TRUE&No\\
+ \hline
+ Overcast&Hot&High&FALSE&Yes\\
+ \hline
+ Sunny&Mild&High&FALSE&No\\
+ \hline
+ Rainy&Cool&Normal&FALSE&Yes\\
+ \hline
+ Sunny&Cool&Normal&FALSE&Yes\\
+ \hline
+ Rainy&Cool&Normal&FALSE&Yes\\
+ \hline
+ Sunny&Hot&Normal&FALSE&Yes\\
+ \hline
+ Overcast&Mild&High&TRUE&Yes\\
+ \hline
+ Sunny&Mild&High&TRUE&No\\
+ \hline
+ Sunny & Cool& High & False	& ? \\ [1ex] 
+ \hline
+\end{tabular}
+%\caption{Given Homework 5 Question 5 Table}
+%\label{table:kysymys}
+%\end{table}
+\end{center}
+
+%
+% Conditional Probability (Kolmogorov's probability theory); note: P(B)≠0
+%
+
+% reference equation number \ref{Conditional Probability Definition}
+
+% Title
+\begin{center} Conditional Probability Definition \footnote{Conditional Probability definition from Kolmogorov's probability theory. } \end{center}
+
+% Equation
+\begin{equation} \tag{1}
+		\nonumber P \left( A | B \right) = \frac{ P  \left( A \cap B \right)}{P \left( B \right)}
+		\label{Conditional Probability Definition}
+\end{equation} 
+
+%
+% Bayes' Theorem
+%
+
+% reference equation number \ref{Bayes' Theorem}
+
+% Title
+\begin{center} Bayes' Theorem \end{center}
+
+% Equation
+\begin{equation} \tag{2}
+		\nonumber P \left( A | B \right) = \frac{ P  \left( A  \right) P \left( B | A \right)}{P \left( B \right)}
+		\label{Bayes' Theorem}
+\end{equation} \\
+
+%
+% limits and application
+%
+
+\section{Limitations}
+Assumes: "Weather", "Temp", "Humidity", and "Windy" are independent categorical variables.
+
+%The Naive Bayes Classifier outlined bellow can only be applied to datasets where the column values are independent categorical variables.
+
+
+%
+% Derivation of Bayes' Theorem From Conditional Probability
+%
+
+\section{Derivation of Bayes' Theorem }
+Bayes' Theorem can be derived from the definition of Conditional Probability in  equation \ref{Conditional Probability Definition} by first substituting $A = B$ and $B = A$,
+
+%Bayes' Theorem can be derived from the definition of Conditional Probability in  equation \ref{Conditional Probability Definition} by substituting $A = B$ and $B = A$, solving for $P  \left( A \cap B \right) $ and then substituting that back into the original definition.
+
+%The definition for Conditional Probability in equation \ref{Conditional Probability Definition} after substituting $A = B$ and $B = A$ is:
+
+% Conditional Probability Definition with A = B, B = A substitution
+
+% Equation
+\begin{equation} \tag{eq \ref{Conditional Probability Definition}: A = B, B = A substitution}
+		\nonumber P \left( B | A \right) = \frac{ P  \left( B \cap A \right)}{P \left( A \right)}
+\end{equation} 
+
+
+This equation can be solved for $P  \left( A \cap B \right) $:
+
+% Conditional Probability Definition with A = B, B = A solved for P(A and B)
+\begin{equation} 
+		\nonumber P  \left( B \cap A \right)  =  P  \left( A \right) P \left( B | A \right)
+\end{equation} 
+
+% Commutative Property of Intersection 
+\begin{equation} 
+		\nonumber P  \left( A \cap B \right)  =  \nonumber P  \left( B \cap A \right) 
+\end{equation} 
+
+% Solving for P(A and B) in above equation
+\begin{equation} \tag{*}
+		\nonumber P  \left( A \cap B \right)  =  P  \left( A \right) P \left( B | A \right)
+		\label{equation:*}
+\end{equation} 
+
+% Substitution of new definition of P(A and B) into original Conditional Probability Definition 
+% Obtating bayes' theorem
+This definition of $P  \left( A \cap B \right)$ in equation \ref{equation:*} can be substituted into the equation defining Conditional Probability (equation \ref{Conditional Probability Definition}) to find Bayes' Theorem (equation \ref{Bayes' Theorem}):
+
+% Equation Conditional Probability Definition
+\begin{equation} \tag{1}
+		\nonumber P \left( A | B \right) = \frac{ P  \left( A \cap B \right)}{P \left( B \right)}
+\end{equation} 
+
+% Equation Bayes' Theorem
+\begin{equation} \tag{2}
+		\nonumber P \left( A | B \right) = \frac{ P  \left( A  \right) P \left( B | A \right)}{P \left( B \right)}
+\end{equation} \\
+
+\clearpage
+
+%
+% Solving For (?) using Bayes' Theorem 
+%
+
+\section{Question 5}
+
+% 
+% Final Row Table 2
+%
+
+% Title
+\begin{center} Final Row  \end{center}
+
+\begin{center}
+%\begin{table}
+ \begin{tabular}{||c c c c c||} 
+ \hline
+ Weather & Temp & Humidity & Windy & Play \\ [0.5ex] 
+ \hline\hline
+ Sunny & Cool& High & False	& ? \\ [1ex] 
+ \hline
+\end{tabular}
+%\caption{Given Homework 5 Question 5 Table}
+%\label{table:kysymys}
+%\end{table}
+\end{center}
+
+%Getting to equation values from the table entries:
+\begin{flalign}
+	\hline
+	&\, \nonumber \text{        Table To Equation Conversions} \\
+	\hline
+	&\nonumber \\
+	% v
+	&\, \nonumber v_{column} = \, \text{selected categorical value of specified column}& \\
+	% P(v_{column})
+	&\, \nonumber P \left( v_{column} \right) = \frac{\text{number of rows where column entry is $v_{column}$}}{\text{total number of rows}}& \\
+	% P(v1|v2)
+	&\, \nonumber  P \left( v_{column_1} | v_{column_2} \right) = \frac{\text{number of rows where $column_1$ is $v_{column_1}$ and $column_2$ is $v_{column_2}$}}{\text{number of rows where $column_2$ is $v_{column_2}$}}& \\
+	&\nonumber \\
+	\hline
+	&\nonumber
+\end{flalign}
+
+
+% example v
+\iffalse
+\begin{equation} 
+	\nonumber \text{ex:  } 
+	v_{Play} = \, Yes
+\end{equation}
+\fi
+
+%Substitution Values For final row
+\begin{center} Plugging in the given values from final row into equation variables:\end{center}
+$v_{Weather} = \, \text{Sunny}$, \\ 
+$v_{Temp} = \, \text{Cool}$, \\ 
+$v_{Humidity} = \, \text{High}$, \\ 
+$v_{Windy} = \, \text{False}$ \\ \\ 
+And (in place of the ?) to find the probability that the value in the "Play" column is "Yes"... \\ \\
+$v_{Play} = \, \text{Yes}$. \\ \\
+
+% Using Bayes' Theorem for probability of Yes in play column (?)
+%Writing Bayes' Theorem to find the probability of a "Yes" value in the "Play" column of the table:
+
+
+% new command:
+\newcommand{\vand}{v_{Weather} \dots \, \cap \, v_{Windy}}
+\newcommand{\vprobs}{P \left( v_{Weather}\right) \dots \, \, P \left( v_{Windy} \right) }
+\newcommand{\vbarprobs}{P \left( v_{Weather} | v_{Play} \right) \dots \, \, P \left( v_{Windy} | v_{Play} \right) }
+
+%Short hand: \\ \\ $v_{Weather} \cap v_{Temp} \cap v_{Humidity} \cap v_{Windy} = \vand{}$
+
+%
+% bayes' theorem direct for question 5
+%
+
+% header
+\begin{center} Values directly substituted into Bayes' Theorem: \end{center}
+
+% Equation Bayes' Theorem
+\begin{equation} \tag{2}
+		\nonumber P \left( A | B \right) = \frac{ P  \left( A  \right) P \left( B | A \right)}{P \left( B \right)}
+\end{equation}
+
+% direct substitution
+\begin{equation}
+		\nonumber P \left( v_{Play} | \vand{} \right) 
+		= \frac{ P  \left(  v_{Play} \right) P \left( \vand{} |  v_{Play} \right)}{P \left(  \vand{} \right)} 
+\end{equation} \\
+
+% shorted notation definition
+Where,
+\begin{equation}
+ \nonumber v_{Weather} \cap v_{Temp} \cap v_{Humidity} \cap v_{Windy} = \vand{}
+\end{equation} \\ \\
+
+
+%
+% Assumptions
+%
+
+If the columns are independent variables then,
+	
+	\begin{equation} \tag{3}
+		\nonumber P \left( \vand \right) =  \vprobs{}
+	\end{equation}
+	
+	\begin{equation} \tag{4}
+		\nonumber P \left( \vand{} |  v_{Play} \right) = \vbarprobs{}
+	\end{equation} \\ \\
+	
+%
+% Final equation for problem 5
+%
+\begin{center} Final Equation \end{center}
+
+Substituting equations 3 and 4 into the version of Bayes' Theorem above:
+
+% bayes' theorem final for question 5
+\begin{equation}
+		\nonumber P \left( v_{Play} | \vand{} \right) 
+		= \frac{ P  \left(  v_{Play} \right) \vbarprobs{}}{ \vprobs{}}
+\end{equation} \\
+
+% Result from table
+% answer 0.49603174603174593
+\begin{center} Results \end{center}
+\begin{equation}
+		\nonumber P \left( v_{Play} | \vand{} \right) 
+		= \frac{ 0.6 * 0.33 * 0.5 * 0.33 * 0.83 }{ 0.4 * 0.5 * 0.4 * 0.7} = 0.49
+\end{equation}
+
+
+\end{document}
